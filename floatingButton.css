@@ -16,4 +16,20 @@
   align-items: center;
 
 }
+#chatSyncPopup {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
 
+#chatSyncPopup.show {
+  opacity: 1;
+}
