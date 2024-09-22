@@ -1,0 +1,37 @@
+{
+  "manifest_version": 3,
+  "name": "ChatSync Extension",
+  "version": "1.0",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "clipboardWrite"
+  ],
+  "host_permissions": [
+    "https://chatgpt.com/*",
+    "https://claude.ai/*"
+  ],
+  "action": {
+    "default_icon": {
+      "32": "icon-32.png",
+      "48": "icon-48.png"
+    },
+    "default_popup": "hello.html"
+  },
+  "web_accessible_resources" : [
+    {
+      "resources": ["icon.png", "contemplation.ico", "icon-32.png","icon-48.png"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "content_scripts": [
+    {
+      "matches": [ 
+          "https://chatgpt.com/*",
+          "https://claude.ai/*"
+        ],
+      "js": ["content.js"],
+      "css": ["floatingButton.css"]
+    }
+  ]
+}
