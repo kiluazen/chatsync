@@ -1,8 +1,10 @@
 function extractChatMessages() {
     let chatMessages = [];
     const currentURL = window.location.hostname;
+    let aiName = '';
     
     if (currentURL.includes('chatgpt.com')) {
+        aiName = 'ChatGPT';
         const messageDivs = document.querySelectorAll('div[data-message-author-role]');
     
         messageDivs.forEach(div => {
@@ -10,10 +12,11 @@ function extractChatMessages() {
             const content = div.querySelector('div > div')?.textContent.trim();
             
             if (content) {
-                chatMessages.push({'role':role, 'content':content });
+                chatMessages.push({'role': role, 'content': content});
             }
         });
     } else if (currentURL.includes('claude.ai')){
+        aiName = 'Claude';
         const messageDivs = document.querySelectorAll('.font-claude-message, .font-user-message');
         
         messageDivs.forEach(div => {
@@ -29,10 +32,14 @@ function extractChatMessages() {
         return { status: "error", message: "Unsupported website" };
     }
     
+    // Format messages as clean text
+    let formattedChat = '';
+    chatMessages.forEach(message => {
+        const speaker = message.role === 'assistant' ? aiName : 'User';
+        formattedChat += `${speaker}:\n${message.content}\n\n`;
+    });
 
-    const jsonChat = JSON.stringify(chatMessages, null, 2);
-    return { status: "success", data: jsonChat };
-
+    return { status: "success", data: formattedChat };
 }
 
 function copyToClipboard(text) {

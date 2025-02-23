@@ -3,8 +3,6 @@
   "name": "ChatSync Extension",
   "version": "1.0",
   "permissions": [
-    "activeTab",
-    "storage",
     "clipboardWrite"
   ],
   "host_permissions": [
@@ -21,7 +19,10 @@
   "web_accessible_resources" : [
     {
       "resources": ["icon.png", "contemplation.ico", "icon-32.png","icon-48.png"],
-      "matches": ["<all_urls>"]
+     "matches": [
+        "https://chatgpt.com/*",
+        "https://claude.ai/*"
+      ]
     }
   ],
   "content_scripts": [
